@@ -48,7 +48,7 @@ class App extends React.Component {
             </div>
           </main>
           <footer>
-            ©2019 Market • Privacy Policy
+            ©2021 Market • Privacy Policy
           </footer>
         </div>
       </Provider>

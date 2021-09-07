@@ -13,7 +13,8 @@ import {
             order: action.order,
             items: action.payload, 
             filteredItems: action.payload,
-            page: action.page 
+            page: action.page,
+            params: action.params
           };
       case FETCH_BRANDS:
         return { 

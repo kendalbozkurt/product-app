@@ -16,6 +16,10 @@ class Products extends Component {
       this.props.fetchProducts();
     }
 
+    onClick (parameter) {
+      this.props.fetchProducts(1, 16, this.props.sort, this.props.order, parameter)
+    }
+
     render() {
         return (
            <div>
@@ -24,8 +28,14 @@ class Products extends Component {
               ) : (
                 <div>
                 <h4>Products</h4>
-                <button className="button filter-button">Mug</button>
-                <button className="button filter-button">Shirt</button>
+                <button className="button filter-button" onClick={() => {
+                    this.onClick([{itemType: "mug"}]);
+                }}
+                >Mug</button>
+                <button className="button filter-button"onClick={() => {
+                    this.onClick([{itemType: "shirt"}]);
+                }}
+                >Shirt</button>
                 <ul className="products">
                   {this.props.products.map((product) => (
                   <li key={product.slug}>
@@ -53,7 +63,7 @@ class Products extends Component {
                 pageCount={Math.ceil(this.props.products.total / 16)}
                 pageRangeDisplayed={2}
                 marginPagesDisplayed={1}
-                onPageChange={(data) => this.props.fetchProducts(data.selected + 1, 16, this.props.sort, this.props.order)}
+                onPageChange={(data) => this.props.fetchProducts(data.selected + 1, 16, this.props.sort, this.props.order, this.props.params)}
                 containerClassName={"pagination"}
               />
               </div>
@@ -67,5 +77,6 @@ export default connect((state) => ({
   products: state.products.filteredItems,
   sort: state.products.sort,
   page: state.products.page,
-  order: state.products.order
+  order: state.products.order,
+  params: state.products.params
 }), {fetchProducts,  addToCart})( Products);

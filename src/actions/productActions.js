@@ -1,11 +1,15 @@
 import { FETCH_PRODUCTS, FETCH_BRANDS } from "../types";
-export const fetchProducts = (page = 1, limit = 16, sort, order, brands = undefined) => async (dispatch) => {
+export const fetchProducts = (page = 1, limit = 16, sort, order, params) => async (dispatch) => {
   let url = `/products?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`
-  if (!!brands) {
-    for (const brand of brands) {
-      url += `&manufacturer=${brand}`;
+  if (!!params) {
+    for (const param of params) {
+      var keys = Object.keys(param);
+      for (const key of keys) {
+        url += `&${key}=${param[key]}`;
+      }
     }
   }
+
   const res = await fetch(url);
   const data = await res.json();
   data['total'] = res.headers.get('X-Total-Count');
@@ -15,6 +19,7 @@ export const fetchProducts = (page = 1, limit = 16, sort, order, brands = undefi
     page: page,
     sort: sort,
     order: order,
+    params: params
   });
 };
 

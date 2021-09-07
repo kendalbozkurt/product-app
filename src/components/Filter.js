@@ -13,14 +13,10 @@ class Filter extends Component {
 
   onChange(e, slug) {
     if(e.currentTarget.checked) {
-      this.state.selected.push(slug);
+      this.state.selected.push({manufacturer: slug});
     }else{
-      const index = this.state.selected.indexOf(slug);
-      if (index > -1) {
-        this.state.selected.splice(index, 1);
-      }
+      this.state.selected = this.state.selected.filter(function(el) { return el.manufacturer != slug; }); 
     }
-    
     this.props.fetchProducts(
       this.props.page,
       16,
@@ -30,12 +26,12 @@ class Filter extends Component {
     )
   }
   
-
   componentDidMount(){
     this.props.fetchBrands();
   }
+
   render() {
-    return (!this.props.filteredProducts && !this.props.brands) ? (
+    return (!this.props.filteredProducts) ? (
       <div>Loading...</div>
     ) : (
       <div className="filter">
@@ -46,7 +42,8 @@ class Filter extends Component {
                   this.props.page,
                   16,
                   e.target.value,
-                  e.target.getAttribute("data-order")
+                  e.target.getAttribute("data-order"),
+                  this.state.params
                 )
               }>
             <label><input type="radio" value="price" data-order="asc" name="sorting" /> Price low to high</label>
@@ -77,7 +74,8 @@ export default connect(
     filteredProducts: state.products.filteredItems,
     sort: state.products.sort,
     page: state.products.page,
-    order: state.products.order
+    order: state.products.order,
+    params: state.products.params
   }),
   {
     fetchBrands,
