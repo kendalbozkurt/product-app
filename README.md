@@ -1,6 +1,6 @@
 ### Installing dependencies
 
-We need to install javascript and JSON server dependencies.
+We need to install packages and JSON server dependencies.
 
 For frontend dependencies
 
@@ -36,5 +36,5 @@ When you start project, this urls will be avalaible.
 | App      | Url |
 | ----------- | ----------- |
 | React app      | http://localhost:3000       |
-| Backend api(JSON server) | http://localhost:3004 |
+| Backend API(JSON server) | http://localhost:3004 |
 
