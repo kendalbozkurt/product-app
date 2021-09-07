@@ -19,9 +19,11 @@ class Filter extends Component {
   onChange(e, slug) {
     if(e.currentTarget.checked) {
       this.state.selected.push({manufacturer: slug});
+      document.getElementById('all').checked = false;
     }else{
       this.state.selected = this.state.selected.filter(function(el) { return el.manufacturer != slug; }); 
     }
+
     this.props.fetchProducts(
       this.props.page,
       16,
@@ -29,6 +31,14 @@ class Filter extends Component {
       this.props.order,
       this.state.selected,
     )
+  }
+  unCheckAll () {
+    this.props.fetchProducts(1, 16, this.props.sort, this.props.order);
+    var checks = document.querySelectorAll('input[class="brand-checkbox"]');
+    for(var i =0; i< checks.length;i++){
+        var check = checks[i];
+        check.checked = false;
+    }
   }
   
   render() {
@@ -57,10 +67,13 @@ class Filter extends Component {
         <div className="filter-brands">
           <h2>Brands</h2>
           <div className="brands">
+          <label><input id="all" value="all" type="checkbox"
+                onChange={ (e) => e.currentTarget.checked ? this.unCheckAll()
+                : undefined} />All</label>
             {this.props.brands.map((brand) => (    
-              <label><input
+              <label><input 
                 onChange={ (e) => this.onChange(e, brand.slug) }
-                id={brand.slug} type="checkbox" value={brand.slug} /> {brand.name}</label>
+                id={brand.slug} className="brand-checkbox" type="checkbox" value={brand.slug} /> {brand.name}</label>
             ))}
           </div>
         </div>
