@@ -23,6 +23,9 @@ class Products extends Component {
               <div>Loading...</div>
               ) : (
                 <div>
+                <h4>Products</h4>
+                <button className="button filter-button">Mug</button>
+                <button className="button filter-button">Shirt</button>
                 <ul className="products">
                   {this.props.products.map((product) => (
                   <li key={product.slug}>

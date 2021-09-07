@@ -13,9 +13,14 @@ body {
   background: #FAFAF0;
   font-family: Open Sans;
   font-style: normal;
-  font-weight: 600;
   font-size: 13px;
   line-height: 18px;
+}
+h4{
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 26px;
 }
 
 .grid-container {
@@ -217,8 +222,8 @@ hr.cart-border{
 }
 
 .product-info {
-  max-width: 160px;
-  margin-right: 3px;
+  width: 200px;
+  margin-right: 10px;
   display:inline-block;
 }
 /* pagination */
@@ -277,4 +282,14 @@ label { float: left; clear: left; }
 .brands {
   overflow: auto;
   height: 210px;
+}
+
+.filter-button {
+  color: #1EA4CE;
+  margin-bottom: 10px;
+}
+
+.filter-button:focus{
+  color: #fff;
+  background-color: #1EA4CE;
 }
