@@ -11,6 +11,11 @@ class Filter extends Component {
     };
   }
 
+  componentDidMount(){
+    this.props.fetchBrands();
+  }
+
+
   onChange(e, slug) {
     if(e.currentTarget.checked) {
       this.state.selected.push({manufacturer: slug});
@@ -26,10 +31,6 @@ class Filter extends Component {
     )
   }
   
-  componentDidMount(){
-    this.props.fetchBrands();
-  }
-
   render() {
     return (!this.props.filteredProducts) ? (
       <div>Loading...</div>
@@ -69,8 +70,8 @@ class Filter extends Component {
 }
 export default connect(
   (state) => ({
-    products: state.products.items,
     brands: state.products.brands,
+    products: state.products.items,
     filteredProducts: state.products.filteredItems,
     sort: state.products.sort,
     page: state.products.page,
